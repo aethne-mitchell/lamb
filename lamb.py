@@ -25,7 +25,7 @@ def t_error(t):
 import ply.lex as lex
 lex.lex() #debug=1)
 
-# PARSER **************
+# PARSER ***************
 precedence = (
 	('left', 'LEFT'),
 	)
