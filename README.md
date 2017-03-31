@@ -1,8 +1,7 @@
 <h1>Lλmb</h1>
 A small lambda calculus reducer using PLY
 
-Sample output, multiplying 2 and 3: 
-
+Sample output, multiplying 2 and 3:
 <code><pre>Lλmb:  Parsing...
 Lλmb:  Statement: ((λm.λn.λf.m(nf))(λa.λb.a(ab)))(λc.λd.c(c(cd)))
 Lλmb:  Reducing...
