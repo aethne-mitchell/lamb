@@ -12,3 +12,8 @@ Lλmb:  Reducing...
        β:05:  λf.λb.f(f(f(f(f(fb)))))
 Lλmb:  Done
 Lλmb:  λf.λb.f(f(f(f(f(fb)))))</pre></code>
+
+Todo:
+<li>Error handling</li>
+<li>Verbose Output</li>
+<li>More tests</li>
