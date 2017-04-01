@@ -1,7 +1,7 @@
 <h1>Lλmb</h1>
-A small lambda calculus reducer using PLY
+<p align="left">
+A small lambda calculus reducer using PLY<br>
 Example:
-<p align="center">
   <img src="https://raw.githubusercontent.com/aethne-mitchell/lamb/master/sample.png"/>
 </p>
 Todo:
