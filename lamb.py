@@ -1,6 +1,26 @@
-import sys, copy
+import sys, copy, os
 sys.path.insert(0, "../..")
-NAME = "Lλmb:  "
+
+if os.name == 'nt':
+    LAMBDA_SYMBOL = '&'
+    BETA_SYMBOL = 'B'
+else:
+    LAMBDA_SYMBOL = 'λ'
+    BETA_SYMBOL = 'β'
+
+NAME = "L" + LAMBDA_SYMBOL + "mb:  "
+
+if len(sys.argv) == 1:
+    print((NAME + "Please enter expression: (you can use '&' for lambda)"))
+    print(' '*len(NAME) + 'Example: (&x.x)(&y.yy)')
+    prg = input('>')
+    if len(prg) < 4:
+        print("Invalid")
+        sys.exit()
+else:
+    print("If you tried to enter a command line option, don't think it will do anything.")
+    sys.exit()
+
 tokens = ('LAMBDA', 'IDENTIFIER')
 literals =['(',')','.']
 
@@ -58,10 +78,11 @@ def p_parens(p):
 
 def p_error(p):
     print("Syntax error at '%s'" % p.value)
+    sys.exit()
 
 import ply.yacc as yacc
 parser = yacc.yacc()
-prg = "(λm.λn.λf.m (n f)) (λa.λb.a(a(b))) (λc.λd.c(c(c(d))))"
+#prg = "(&m.&n.&f.m(nf)) ((λm.λn.λf.m (n f)) (λa.λb.a(a(b))) (λc.λd.c(c(c(d))))) ((λm.λn.λf.m (n f)) (λa.λb.a(a(b))) (λc.λd.c(c(c(d)))))" #test
 print(NAME + "Parsing...")
 tree = parser.parse(prg) #, debug=1)
 
@@ -93,7 +114,7 @@ def tree_to_str(t):
 	if t[0] == 'expr':
 		return tree_to_str(t[1])
 	if t[0] == 'funct':
-		return 'λ' + tree_to_str(t[1]) + '.' + tree_to_str(t[2])
+		return LAMBDA_SYMBOL + tree_to_str(t[1]) + '.' + tree_to_str(t[2])
 	if t[0] == 'appl':
 		ls = rs = ""
 		if t[1][1][0] == 'id':
@@ -184,14 +205,14 @@ def nocomma(s):
 prev_tree = ['eval', ['id', 'wew']]
 tree = tuple_to_list(tree)
 stepcounter = 1
-while tree_to_str(prev_tree) != tree_to_str(tree):
+while True:
 	prev_tree = copy.deepcopy(tree)
 	dfdo(tree, app)
 	clean_tree(tree)
-	stepstr = ("%.2d" % (stepcounter))
-	print(' '*len(NAME) + 'β:'+("%.2d" % (stepcounter)) + ': ' + tree_to_str(tree))
+	if tree_to_str(prev_tree) == tree_to_str(tree):
+		break
+	print(' '*len(NAME) + BETA_SYMBOL + ':'+("%.2d" % (stepcounter)) + ': ' + tree_to_str(tree))
 	stepcounter += 1
-	#print(nocomma(str(tree)))
 print(NAME + "Done")
 clean_tree(tree)
 #print(nocomma(str(tree)))
