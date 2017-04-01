@@ -1,5 +1,5 @@
 <h1>Lλmb</h1>
-<p align="left">
+<p style="margin-top: 10px" align="left">
 A small lambda calculus reducer using PLY<br>
 Example:
   <img src="https://raw.githubusercontent.com/aethne-mitchell/lamb/master/sample.png"/>
