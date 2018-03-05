@@ -7,4 +7,4 @@ script:
   - coverage run tests.py
 
 after_sucess:
-  - codecov --token=00ba60aa-12a9-4e72-8432-ccd8c4b43df6
+  - codecov
