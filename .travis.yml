@@ -5,6 +5,7 @@ install:
 
 script:
   - coverage run tests.py
+  - codecov
 
 after_sucess:
   - codecov
